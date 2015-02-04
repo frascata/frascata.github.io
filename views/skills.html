@@ -1,0 +1,21 @@
+<div class="col m12">
+    <h3 class="section-title">Competenze</h3>
+</div>
+<div class="col m12" ng-repeat="s in ::skills">
+    <div class="card-panel">
+        <h5 class="materialize-red-text">{{s.title}}</h5>
+
+        <div class="row">
+            <div class="col m2" ng-repeat="item in s.list">
+                <p class="center-align">
+                    <img style="height:50px" class="responsive-img" src="{{item.logo}}">
+                </p>
+                <p class="center-align">
+                    <span>{{item.title}}</span>
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+</div>

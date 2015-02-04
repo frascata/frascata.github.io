@@ -1,0 +1,14 @@
+.card .card-image {
+    min-height: 100px;
+}
+.card .card-content {
+    min-height: 200px;
+}
+.parallax-container {
+    height: 300px;
+}
+
+.section-title {
+    color: white;
+    margin-top: -140px;
+}

@@ -1,0 +1,36 @@
+<div class="col s12">
+    <h3 class="section-title">Esperienza</h3>
+</div>
+<div class="col s12 m4" ng-repeat="card in ::experienceCards">
+    <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+            <div class="valign-demo valign-wrapper">
+                <p>
+                    <img src="{{card.logo}}">
+                </p>
+            </div>
+        </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">
+                {{card.title}} <i class="mdi-navigation-more-vert right"></i>
+            </span>
+            <p>
+                <small>{{card.subtitle}}</small>
+            </p>
+        </div>
+        <div class="card-action">
+            <p>
+                <a ng-href="{{card.link}}">
+                    <i class="mdi-content-link"></i> Sito Web
+                </a>
+            </p>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+                <small></small>
+                <i class="mdi-navigation-close right"></i>
+            </span>
+            <p>{{card.description}}</p>
+        </div>
+    </div>
+</div>
