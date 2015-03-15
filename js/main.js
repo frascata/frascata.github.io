@@ -2,7 +2,7 @@
 
 angular.module('app', [])
     .run(['$anchorScroll', function ($anchorScroll) {
-        $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
+        $anchorScroll.yOffset = 160;   // always scroll by 50 extra pixels
     }])
     .controller('MainController', ['$scope', '$anchorScroll', '$location',
         function ($scope, $anchorScroll, $location) {
