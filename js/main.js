@@ -2,7 +2,7 @@
 
 angular.module('app', [])
     .run(['$anchorScroll', function ($anchorScroll) {
-        $anchorScroll.yOffset = 160;   // always scroll by 50 extra pixels
+        $anchorScroll.yOffset = 160;
     }])
     .controller('MainController', ['$scope', '$anchorScroll', '$location',
         function ($scope, $anchorScroll, $location) {
@@ -12,7 +12,7 @@ angular.module('app', [])
 
             $scope.experienceCards = [
                 {
-                    logo: 'images/logo/bdt.png',
+                    logo: 'images/logo/bdt.jpeg',
                     title: 'Big Data Technologies',
                     subtitle: 'Impresa specializzata nello sviluppo, produzione e commercializzazione di applicativi software/web (KMS, CMS, Big Data)',
                     link: '',
@@ -131,7 +131,7 @@ angular.module('app', [])
             $scope.projects = [{
                 title: "vivaifrappi.com",
                 link: "http://www.vivaifrappi.com",
-                img: "images/vivaifrappi.png",
+                img: "images/vivaifrappi.jpeg",
                 skills: [
                     {
                         title: 'Django',
