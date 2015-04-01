@@ -2,23 +2,12 @@ angular.module('app')
     .controller('DemoController', ['$scope', 'RESTfactory',
         function ($scope, RESTfactory) {
 
-            console.log("DemoController");
+            $scope.from= 0;
+            $scope.size= 10;
+            $scope.searchText = '';
 
-
-            //RESTfactory.put({pippo: "aaaa"}).then(function(response){
-            //    console.log(response);
-            //});
-
-            //RESTfactory.get({id: "DYp4-QVwTA-RQEF8Gm7b9w"}).then(function(response){
-            //    console.log(response);
-            //});
-
-            //RESTfactory.search({from: 1, size: 10}).then(function(response){
-            //    console.log(response);
-            //});
-
-            function initTable() {
-                RESTfactory.search().then(function (response) {
+            function initTable(json) {
+                RESTfactory.search(json).then(function (response) {
                     $scope.items = response.data;
                     $scope.total = response.total;
                 });
@@ -26,15 +15,17 @@ angular.module('app')
 
             initTable();
 
+            $scope.changePage= function(from){
+                $scope.from= from<0 ? 0 : from;
+                $scope.executeSearch();
+            };
 
-            $scope.searchText = '';
-
-            $scope.executeSearch = function (txt) {
-                console.log(txt);
-                RESTfactory.search({query: {field: "comune", term: txt}}).then(function (response) {
-                    console.log(response);
-                    $scope.items = response;
-                });
+            $scope.executeSearch = function () {
+                var searchJson= {from: $scope.from, size: $scope.size};
+                if (angular.isDefined($scope.searchText) && $scope.searchText.trim()!='') {
+                    searchJson['query']= {field: "comune", term: $scope.searchText}
+                }
+                return initTable(searchJson);
             };
 
             $scope.editorIsOpen = false;
@@ -43,17 +34,34 @@ angular.module('app')
                 if (!$scope.editorIsOpen) {
                     $scope.editorIsOpen = !$scope.editorIsOpen;
                 }
-                if (angular.isDefined($scope.newItem) && $scope.newItem._id == item._id) {
+                if (angular.isDefined($scope.newItem) && angular.isDefined(item) && $scope.newItem._id == item._id) {
                     $scope.closeEditor();
                 }
-                $scope.newItem = angular.copy(item);
-                $scope.master = angular.copy(item);
+                /*
+                * Get data from database (REST get).
+                * This is not necessary because selected item is available in $scope.
+                    $scope.newItem = angular.copy(item);
+                    $scope.master = angular.copy(item);
+                */
+                if (angular.isDefined(item)){
+                    $scope.editorTitle= "Modifica";
+                    RESTfactory.get({id: item._id}).then(function(response){
+                        $scope.newItem = angular.copy(response);
+                        $scope.master = angular.copy(response);
+                    })
+                } else {
+                    $scope.editorTitle= "Nuovo";
+                    $scope.newItem = {_source:{}};
+                    $scope.master= angular.copy($scope.newItem);
+                }
+
             };
 
             $scope.closeEditor = function () {
                 $scope.editorIsOpen = false;
+                $scope.newItem = undefined;
+                $scope.master = undefined;
             };
-
 
             function showMessage(result) {
                 if (result) {
@@ -69,9 +77,10 @@ angular.module('app')
 
             $scope.saveItem = function (form) {
                 if (form.$valid) {
-
                     if (_.has($scope.newItem, '_id')) {
-                        // edit existing object
+                        /*
+                         * Update data (REST update).
+                         */
                         RESTfactory.update({id: $scope.newItem._id}, $scope.newItem._source).then(function (response) {
                             return response;
                         }).then(function (response) {
@@ -80,7 +89,9 @@ angular.module('app')
                             initTable();
                         });
                     } else {
-                        // new object
+                        /*
+                         * Add new data (REST put).
+                         */
                         RESTfactory.put($scope.newItem._source).then(function (response) {
                             return response;
                         }).then(function (response) {

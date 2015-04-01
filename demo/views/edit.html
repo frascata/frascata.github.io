@@ -4,8 +4,8 @@
             <div class="col s12">
                 <a style="cursor: pointer;" ng-click="closeEditor()">
                     <h5>
-                        <i class="mdi-navigation-chevron-left"></i>
-                        Modifica
+                        <i class="mdi-editor-format-indent-decrease"></i>
+                        {{editorTitle}}
                     </h5>
                 </a>
             </div>
@@ -52,25 +52,22 @@
                                    ng-model="newItem._source.abitanti">
                         </div>
                         <div class="col s12" ng-show="itemForm.$submitted || itemForm.abitanti.$touched">
-                            <span class="help-block" ng-show="itemForm.abitanti.$dirty">Il campo abitanti deve essere un numero</span>
+                            <span class="help-block" ng-show="itemForm.abitanti.$valid">Il campo abitanti deve essere un numero</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s12">
-                            <button class="btn waves-effect waves-light grey darken-1"
+                            <button class="btn waves-effect waves-light grey"
                                     ng-click="resetItem()">
                                 Cancella <i class="mdi-content-clear right"></i>
                             </button>
-                            <button class="btn waves-effect waves-light green darken-4"
+                            <button class="btn waves-effect waves-light green"
                                     ng-click="saveItem(itemForm)">
                                 Salva <i class="mdi-action-done right"></i>
                             </button>
                         </div>
                     </div>
                 </form>
-                aaa
-                <pre>{{itemForm|json}}</pre>
-                bbbb
             </div>
         </div>
     </div>

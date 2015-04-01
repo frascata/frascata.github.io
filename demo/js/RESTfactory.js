@@ -28,25 +28,26 @@ angular.module("app").factory("RESTfactory", [
             },
             "put": function(source) {
                 return data.then(function (data) {
-                    data.push(source);
+                    data.push({_id: Math.random().toString().substr(2), _source: source});
                     console.log(data.length);
                     return true;
                 })
             },
             "search": function(params) {
                 return data.then(function (data) {
-                    var total= data.length;
                     var size = _.has(params,'size') ? params.size : 10;
                     var from = _.has(params,'from') ? params.from : 0;
-                    var to= from==0 ? size : from*size+1;
-                    var result;
+                    var to= from==0 ? size : (from+1)*size;
+                    var result, total;
                     if (_.has(params,'query') && _.has(params.query,'field') && _.has(params.query,'term')){
                         var filteredData= _.filter(data,function(d){
                             return angular.isDefined(d._source) && angular.isDefined(d._source[params.query.field]) && d._source[params.query.field].toLowerCase().indexOf(params.query.term.toLowerCase())!=-1;
                         });
-                        result= filteredData.slice(from,to);
+                        total= filteredData.length;
+                        result= filteredData.slice(from*size,to);
                     } else {
-                        result= data.slice(from,to);
+                        total= data.length;
+                        result= data.slice(from*size,to);
                     }
                     return {total: total, data: result};
                 })
