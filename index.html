@@ -19,7 +19,9 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/materialize/dist/js/materialize.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="demo/js/demoCtrl.js"></script>
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -30,112 +32,122 @@
 <body ng-controller="MainController">
 <header>
     <!--<div class="navbar-fixed">-->
-    <nav>
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="https://github.com/frascata" class="brand-logo">
-                    <em>frascata.github.io</em>
-                </a>
-                <ul class="right side-nav" id="nav-mobile">
-                    <li>
-                        <a href="" ng-click="gotoAnchor('profile')">
-                            Profilo
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" ng-click="gotoAnchor('experience')">
-                            Esperienza
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" ng-click="gotoAnchor('projects')">
-                            Progetti
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" ng-click="gotoAnchor('skills')">
-                            Competenze
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" ng-click="gotoAnchor('education')">
-                            Studi
-                        </a>
-                    </li>
-                </ul>
-                <a class="button-collapse" href="#" data-activates="nav-mobile">
-                    <i class="mdi-navigation-menu"></i>
-                </a>
+        <nav>
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="https://github.com/frascata" class="brand-logo">
+                        <em>frascata.github.io</em>
+                    </a>
+                    <!--<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>-->
+                    <ul class="right hide-on-med-and-down" id="nav-mobile">
+                        <li>
+                            <a href="#profile" ng-click="showDemo=false">
+                                Profilo
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#experience" ng-click="showDemo=false">
+                                Esperienza
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#projects" ng-click="showDemo=false">
+                                Progetti
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#skills" ng-click="showDemo=false">
+                                Competenze
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#education" ng-click="showDemo=false">
+                                Studi
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" ng-click="showDemo=true">
+                                DEMO
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
     <!--</div>-->
 </header>
 
 <main>
-    <div class="parallax-container">
-        <div class="parallax">
-            <img src="images/msg.jpg">
-        </div>
+    <div class="section grey lighten-5" ng-show="showDemo">
+        <div class="container" ng-include="'demo/views/index.html'"></div>
     </div>
-    <div class="section white" id="profile">
-        <div class="row container">
-            <div class="col m6">
-                <h3 class="header">
-                    Francesco <strong>Scatassa</strong>
-                </h3>
-            </div>
-            <div class="col m6">
-                <blockquote>
-                    <p class="flow-text">
-                        <i class="mdi-hardware-phonelink left"></i> Software / Frontend Developer
-                    </p>
 
-                    <p class="flow-text">
-                        <i class="mdi-communication-email left"></i> francesco.scatassa@gmail.com
-                    </p>
-
-                    <p class="flow-text">
-                        <i class="mdi-action-home left"></i> Milano, Italia
-                    </p>
-                </blockquote>
+    <div class="row" ng-hide="showDemo">
+        <div class="parallax-container">
+            <div class="parallax">
+                <img src="images/msg.jpg">
             </div>
         </div>
-    </div>
-    <div class="parallax-container">
-        <div class="parallax">
-            <img src="images/st-moritz.JPG">
-        </div>
-    </div>
-    <div class="section" id="experience">
-        <div class="row container" ng-include="'views/experience.html'"></div>
-    </div>
+        <div class="section white" id="profile">
+            <div class="row container">
+                <div class="col m6">
+                    <h3 class="header">
+                        Francesco <strong>Scatassa</strong>
+                    </h3>
+                </div>
+                <div class="col m6">
+                    <blockquote>
+                        <p class="flow-text">
+                            <i class="mdi-hardware-phonelink left"></i> Software / Frontend Developer
+                        </p>
 
-    <div class="parallax-container">
-        <div class="parallax">
-            <img src="images/rome.JPG">
-        </div>
-    </div>
-    <div class="section grey lighten-5" id="skills">
-        <div class="row container" ng-include="'views/skills.html'"></div>
-    </div>
+                        <p class="flow-text">
+                            <i class="mdi-communication-email left"></i> francesco.scatassa@gmail.com
+                        </p>
 
-    <div class="parallax-container">
-        <div class="parallax">
-            <img src="images/nyc.jpg">
+                        <p class="flow-text">
+                            <i class="mdi-action-home left"></i> Milano, Italia
+                        </p>
+                    </blockquote>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="section grey lighten-5" id="projects">
-        <div class="row container" ng-include="'views/projects.html'"></div>
-    </div>
 
-    <div class="parallax-container">
-        <div class="parallax">
-            <img src="images/pesaro.jpg">
+        <div class="parallax-container">
+            <div class="parallax">
+                <img src="images/st-moritz.JPG">
+            </div>
         </div>
-    </div>
-    <div class="section grey lighten-5" id="education">
-        <div class="row container" ng-include="'views/education.html'"></div>
+        <div class="section scrollspy" id="experience">
+            <div class="row container" ng-include="'views/experience.html'"></div>
+        </div>
+
+        <div class="parallax-container">
+            <div class="parallax">
+                <img src="images/rome.JPG">
+            </div>
+        </div>
+        <div class="section grey lighten-5 scrollspy" id="skills">
+            <div class="row container" ng-include="'views/skills.html'"></div>
+        </div>
+
+        <div class="parallax-container">
+            <div class="parallax">
+                <img src="images/nyc.jpg">
+            </div>
+        </div>
+        <div class="section grey lighten-5 scrollspy" id="projects">
+            <div class="row container" ng-include="'views/projects.html'"></div>
+        </div>
+
+        <div class="parallax-container">
+            <div class="parallax">
+                <img src="images/pesaro.jpg">
+            </div>
+        </div>
+        <div class="section grey lighten-5 scrollspy" id="education">
+            <div class="row container" ng-include="'views/education.html'"></div>
+        </div>
     </div>
 </main>
 
@@ -181,9 +193,9 @@
 </footer>
 <script type="text/javascript">
     $(document).ready(function () {
-//        $(".button-collapse").sideNav();
+        $('.scrollspy').scrollSpy();
+
         $('.parallax').parallax();
-//        $('.slider').slider({full_width: true});
         // Initialize collapse button
         $(".button-collapse").sideNav();
         // Initialize collapsible

@@ -1,14 +1,11 @@
 "use strict";
 
-angular.module('app', [])
-    .run(['$anchorScroll', function ($anchorScroll) {
-        $anchorScroll.yOffset = 160;
-    }])
-    .controller('MainController', ['$scope', '$anchorScroll', '$location',
-        function ($scope, $anchorScroll, $location) {
-            var someText = {};
-            someText.message = 'You have started your journey.';
-            $scope.someText = someText;
+angular.module('app', ['duScroll'])
+    .value('duScrollOffset', 160)
+    .controller('MainController', ['$scope',
+        function ($scope) {
+
+            $scope.showDemo= true;
 
             $scope.experienceCards = [
                 {
@@ -155,19 +152,6 @@ angular.module('app', [])
 
                 ]
             }];
-
-
-            $scope.gotoAnchor = function(x) {
-                if ($location.hash() !== x) {
-                    // set the $location.hash to `newHash` and
-                    // $anchorScroll will automatically scroll to it
-                    $location.hash(x);
-                } else {
-                    // call $anchorScroll() explicitly,
-                    // since $location.hash hasn't changed
-                    $anchorScroll();
-                }
-            };
 
         }
     ]);
