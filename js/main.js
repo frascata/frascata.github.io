@@ -1,7 +1,6 @@
 "use strict";
 
-angular.module('app', ['duScroll'])
-    .value('duScrollOffset', 160)
+angular.module('app', [])
     .controller('MainController', ['$scope',
         function ($scope) {
 
