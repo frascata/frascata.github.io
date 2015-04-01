@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="card-panel">
+        <div class="row">
+            <div class="col s12">
+                <a style="cursor: pointer;" ng-click="closeEditor()">
+                    <h5>
+                        <i class="mdi-navigation-chevron-left"></i>
+                        Modifica
+                    </h5>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <form name="itemForm" class="col s12">
+                    <div class="row">
+                        <div class="col s12">
+                            <label for="comune">Comune</label>
+                        </div>
+                        <div class="col s12">
+                            <input id="comune" type="text" class="validate" required
+                                   ng-model="newItem._source.comune">
+                        </div>
+                        <div class="col s12" ng-show="itemForm.$submitted || itemForm.comune.$touched">
+                            <span class="help-block" ng-show="itemForm.comune.$error.required">Il campo comune è obbligatorio</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <label for="provincia">Provincia</label>
+                        </div>
+                        <div class="col s12">
+                            <input id="provincia" type="text" name="provincia" class="validate"
+                                   ng-model="newItem._source.provincia">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <label for="regione">Regione</label>
+                        </div>
+                        <div class="col s12">
+                            <input id="regione" name="regione" type="text" class="validate"
+                                   ng-model="newItem._source.regione">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <label for="abitanti">Abitanti</label>
+                        </div>
+                        <div class="col s12">
+                            <input id="abitanti" name="abitanti" type="number" class="validate"
+                                   ng-model="newItem._source.abitanti">
+                        </div>
+                        <div class="col s12" ng-show="itemForm.$submitted || itemForm.abitanti.$touched">
+                            <span class="help-block" ng-show="itemForm.abitanti.$dirty">Il campo abitanti deve essere un numero</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <button class="btn waves-effect waves-light grey darken-1"
+                                    ng-click="resetItem()">
+                                Cancella <i class="mdi-content-clear right"></i>
+                            </button>
+                            <button class="btn waves-effect waves-light green darken-4"
+                                    ng-click="saveItem(itemForm)">
+                                Salva <i class="mdi-action-done right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                aaa
+                <pre>{{itemForm|json}}</pre>
+                bbbb
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app', [])
+angular.module('app', ['ngResource'])
     .controller('MainController', ['$scope',
         function ($scope) {
 

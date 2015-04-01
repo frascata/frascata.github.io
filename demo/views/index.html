@@ -1,31 +1,76 @@
 <div class="row" ng-controller="DemoController">
     <div class="col s12">
-    <table class="hoverable responsive-table">
-        <thead>
-        <tr>
-            <th data-field="id">Name</th>
-            <th data-field="name">Item Name</th>
-            <th data-field="price">Item Price</th>
-        </tr>
-        </thead>
+        <div class="row">
+            <form class="col s12 m6 offset-m3">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="mdi-action-search prefix"></i>
+                        <input id="icon_prefix" type="text" class="validate"
+                               ng-model="searchText"
+                               ng-keypress="$event.keyCode == 13 ? executeSearch(searchText) : null">
+                        <label for="icon_prefix">Ricerca</label>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-        <tbody>
-        <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-        </tr>
-        <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-        </tr>
-        <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="row">
+
+            <div class="col s12 m12" ng-class="{'l12': !editorIsOpen, 'l6': editorIsOpen}">
+
+                <div class="row">
+                    <div class="col s12">
+                        <em>Totale: {{total}}</em>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <table class="centered hoverable">
+                            <thead>
+                            <tr>
+                                <th>Comune</th>
+                                <th>Provincia</th>
+                                <th>Regione</th>
+                                <th>Abitanti</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in items">
+                                <td>{{item._source.comune}}</td>
+                                <td>{{item._source.provincia}}</td>
+                                <td>{{item._source.regione}}</td>
+                                <td>{{item._source.abitanti}}</td>
+                                <td>
+                                    <a class="waves-effect waves-light btn orange lighten-3" ng-click="editItem(item)">
+                                        <i class="mdi-navigation-chevron-right right"></i>modifica</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="pagination">
+                            <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+                            <li class="active"><a href="#!">1</a></li>
+                            <li class="waves-effect"><a href="#!">2</a></li>
+                            <li class="waves-effect"><a href="#!">3</a></li>
+                            <li class="waves-effect"><a href="#!">4</a></li>
+                            <li class="waves-effect"><a href="#!">5</a></li>
+                            <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- editor-->
+            <div class="col grid-example s12 m12 l6" ng-if="editorIsOpen" ng-include="'demo/views/edit.html'"></div>
+        </div>
+
+    </div>
 </div>
-</div>
+
+
