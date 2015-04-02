@@ -26,6 +26,7 @@ angular.module('app')
                 if (angular.isDefined($scope.searchText) && $scope.searchText.trim()!='') {
                     searchJson['query']= {field: $scope.searchField, term: $scope.searchText}
                 }
+                $scope.closeEditor();
                 return initTable(searchJson);
             };
 

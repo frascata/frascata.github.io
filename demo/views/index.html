@@ -34,51 +34,58 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col s6">
-                            <em>Totale: {{total}}</em>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col s12">
-                            <table class="centered hoverable">
-                                <thead>
-                                <tr>
-                                    <th>Comune</th>
-                                    <th>Provincia</th>
-                                    <th>Regione</th>
-                                    <th>Abitanti</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="item in items">
-                                    <td>{{item._source.comune}}</td>
-                                    <td>{{item._source.provincia}}</td>
-                                    <td>{{item._source.regione}}</td>
-                                    <td>{{item._source.abitanti}}</td>
-                                    <td>
-                                        <a class="waves-effect waves-light btn orange lighten-3"
-                                           ng-click="editItem(item)">
-                                            <i class="mdi-editor-format-indent-increase right"></i>modifica</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="card-panel" ng-if="total==0">
+                        <span class="blue-text text-darken-2">La ricerca non ha prodotto risultati</span>
                     </div>
-                    <div class="divider"></div>
-                    <div class="row">
-                        <div class="col s12">
-                            <ul class="pagination">
-                                <li class="waves-effect" ng-class="{'disabled': from==0}">
-                                    <a ng-click="changePage(from-1)"><i class="mdi-av-skip-previous"></i></a>
-                                </li>
-                                <li class="waves-effect">
-                                    <a ng-click="changePage(from+1)"><i class="mdi-av-skip-next"></i></a>
-                                </li>
-                            </ul>
+                    <div class="row" ng-hide="total==0">
+                        <div class="col-s12">
+                            <div class="row">
+                                <div class="col s6">
+                                    <em>Totale: {{total}}</em>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <table class="centered hoverable">
+                                        <thead>
+                                        <tr>
+                                            <th>Comune</th>
+                                            <th>Provincia</th>
+                                            <th>Regione</th>
+                                            <th>Abitanti</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in items">
+                                            <td>{{item._source.comune}}</td>
+                                            <td>{{item._source.provincia}}</td>
+                                            <td>{{item._source.regione}}</td>
+                                            <td>{{item._source.abitanti}}</td>
+                                            <td>
+                                                <a class="waves-effect waves-light btn orange lighten-3"
+                                                   ng-click="editItem(item)">
+                                                    <i class="mdi-editor-format-indent-increase right"></i>modifica</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <ul class="pagination">
+                                        <li class="waves-effect" ng-class="{'disabled': from==0}">
+                                            <a ng-click="changePage(from-1)"><i class="mdi-av-skip-previous"></i></a>
+                                        </li>
+                                        <li class="waves-effect">
+                                            <a ng-click="changePage(from+1)"><i class="mdi-av-skip-next"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
