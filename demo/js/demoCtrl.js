@@ -5,6 +5,7 @@ angular.module('app')
             $scope.from= 0;
             $scope.size= 10;
             $scope.searchText = '';
+            $scope.searchField = "comune";
 
             function initTable(json) {
                 RESTfactory.search(json).then(function (response) {
@@ -23,7 +24,7 @@ angular.module('app')
             $scope.executeSearch = function () {
                 var searchJson= {from: $scope.from, size: $scope.size};
                 if (angular.isDefined($scope.searchText) && $scope.searchText.trim()!='') {
-                    searchJson['query']= {field: "comune", term: $scope.searchText}
+                    searchJson['query']= {field: $scope.searchField, term: $scope.searchText}
                 }
                 return initTable(searchJson);
             };
@@ -38,7 +39,7 @@ angular.module('app')
                     $scope.closeEditor();
                 }
                 /*
-                * Get data from database (REST get).
+                * Get data from database (REST get [DEMO requirement]).
                 * This is not necessary because selected item is available in $scope.
                     $scope.newItem = angular.copy(item);
                     $scope.master = angular.copy(item);

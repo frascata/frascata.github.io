@@ -52,7 +52,7 @@
                                    ng-model="newItem._source.abitanti">
                         </div>
                         <div class="col s12" ng-show="itemForm.$submitted || itemForm.abitanti.$touched">
-                            <span class="help-block" ng-show="itemForm.abitanti.$valid">Il campo abitanti deve essere un numero</span>
+                            <span class="help-block" ng-show="itemForm.abitanti.$error.number">Il campo abitanti deve essere un numero</span>
                         </div>
                     </div>
                     <div class="row">

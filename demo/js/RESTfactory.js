@@ -29,7 +29,6 @@ angular.module("app").factory("RESTfactory", [
             "put": function(source) {
                 return data.then(function (data) {
                     data.push({_id: Math.random().toString().substr(2), _source: source});
-                    console.log(data.length);
                     return true;
                 })
             },
