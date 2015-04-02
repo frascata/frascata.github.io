@@ -2,8 +2,8 @@ angular.module('app')
     .controller('DemoController', ['$scope', 'RESTfactory',
         function ($scope, RESTfactory) {
 
-            $scope.from= 0;
-            $scope.size= 10;
+            $scope.from = 0;
+            $scope.size = 10;
             $scope.searchText = '';
             $scope.searchField = "comune";
 
@@ -16,15 +16,16 @@ angular.module('app')
 
             initTable();
 
-            $scope.changePage= function(from){
-                $scope.from= from<0 ? 0 : from;
+            $scope.changePage = function (from) {
+                $scope.from = from < 0 ? 0 : from;
                 $scope.executeSearch();
+
             };
 
             $scope.executeSearch = function () {
-                var searchJson= {from: $scope.from, size: $scope.size};
-                if (angular.isDefined($scope.searchText) && $scope.searchText.trim()!='') {
-                    searchJson['query']= {field: $scope.searchField, term: $scope.searchText}
+                var searchJson = {from: $scope.from, size: $scope.size};
+                if (angular.isDefined($scope.searchText) && $scope.searchText.trim() != '') {
+                    searchJson['query'] = {field: $scope.searchField, term: $scope.searchText}
                 }
                 $scope.closeEditor();
                 return initTable(searchJson);
@@ -40,21 +41,21 @@ angular.module('app')
                     $scope.closeEditor();
                 }
                 /*
-                * Get data from database (REST get [DEMO requirement]).
-                * This is not necessary because selected item is available in $scope.
-                    $scope.newItem = angular.copy(item);
-                    $scope.master = angular.copy(item);
-                */
-                if (angular.isDefined(item)){
-                    $scope.editorTitle= "Modifica";
-                    RESTfactory.get({id: item._id}).then(function(response){
+                 * Get data from database (REST get [DEMO requirement]).
+                 * This is not necessary because selected item is available in $scope.
+                 $scope.newItem = angular.copy(item);
+                 $scope.master = angular.copy(item);
+                 */
+                if (angular.isDefined(item)) {
+                    $scope.editorTitle = "Modifica";
+                    RESTfactory.get({id: item._id}).then(function (response) {
                         $scope.newItem = angular.copy(response);
                         $scope.master = angular.copy(response);
                     })
                 } else {
-                    $scope.editorTitle= "Nuovo";
-                    $scope.newItem = {_source:{}};
-                    $scope.master= angular.copy($scope.newItem);
+                    $scope.editorTitle = "Nuovo";
+                    $scope.newItem = {_source: {}};
+                    $scope.master = angular.copy($scope.newItem);
                 }
 
             };
@@ -88,7 +89,7 @@ angular.module('app')
                         }).then(function (response) {
                             showMessage(response);
                             $scope.editorIsOpen = false;
-                            initTable();
+                            $scope.executeSearch();
                         });
                     } else {
                         /*
@@ -99,7 +100,7 @@ angular.module('app')
                         }).then(function (response) {
                             showMessage(response);
                             $scope.editorIsOpen = false;
-                            initTable();
+                            $scope.executeSearch();
                         });
                     }
 

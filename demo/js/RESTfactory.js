@@ -1,5 +1,5 @@
 angular.module("app").factory("RESTfactory", [
-    "$resource", '$http', function($resource,$http) {
+    "$resource", '$http','$filter', function($resource,$http,$filter) {
 
         var data = $http.get('demo/data.json').then(function(response) {
             return response.data.data;
@@ -43,10 +43,10 @@ angular.module("app").factory("RESTfactory", [
                             return angular.isDefined(d._source) && angular.isDefined(d._source[params.query.field]) && d._source[params.query.field].toLowerCase().indexOf(params.query.term.toLowerCase())!=-1;
                         });
                         total= filteredData.length;
-                        result= filteredData.slice(from*size,to);
+                        result= $filter('orderBy')(filteredData,'+_source.comune').slice(from*size,to);
                     } else {
                         total= data.length;
-                        result= data.slice(from*size,to);
+                        result= $filter('orderBy')(data,'+_source.comune').slice(from*size,to);
                     }
                     return {total: total, data: result};
                 })

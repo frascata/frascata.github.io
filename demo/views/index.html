@@ -80,7 +80,7 @@
                                         <li class="waves-effect" ng-class="{'disabled': from==0}">
                                             <a ng-click="changePage(from-1)"><i class="mdi-av-skip-previous"></i></a>
                                         </li>
-                                        <li class="waves-effect">
+                                        <li class="waves-effect" ng-class="{'disabled': total<=size}">
                                             <a ng-click="changePage(from+1)"><i class="mdi-av-skip-next"></i></a>
                                         </li>
                                     </ul>
